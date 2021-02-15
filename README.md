@@ -6,3 +6,4 @@ Next.js Note:
 
 NOTE:
   - [getStaticProps details](https://nextjs.org/learn/basics/data-fetching/getstaticprops-details)
+  - Pages that begin with `[` and end with `]` are dynamic routes in Next.js
