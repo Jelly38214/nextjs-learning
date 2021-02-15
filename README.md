@@ -1,6 +1,7 @@
 
 Next.js Note:
   - Polyfills `fetch()` on both the client and server. You don't need to import it.
+  - `getStaticProps`, `getStaticPaths` won't be included in the JS bundle for the browser. Besides, The API Route code also will not be part of your client bundel.
 
 
 
