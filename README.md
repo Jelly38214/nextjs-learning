@@ -13,11 +13,26 @@ Next.js Note:
   - Polyfills `fetch()` on both the client and server. You don't need to import it.
   - `getStaticProps`, `getStaticPaths` won't be included in the JS bundle for the browser. Besides, The API Route code also will not be part of your client bundel.
 
-自定义 Document
+
+### [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+
+Next.js has built-in support for loading environment . variables from `.env.local` into `process.env`
+
+In order to expose a variable to the browser you have to prefix the variable with `NEXT_PUBLIC_`.
+
+Various env file for various environment:
+  - .env for all environments
+  - .env.development for development environment
+  - .env.production for production environment
+  - .env.test for testing environment(NODE_ENV is set to 'test', though you usually don't need to do this manually as testing tools will address it for you.)
+  - .env.local always overrides the defaults set(this file should be added to `.gitignore`, as it is where secrets can be stored.)
+
+
+### 自定义 Document
 其组成部分:
 
 - Html: html
-- Head：将囊括的标签放置到 head tag， 目前不清楚跟 next/head 有什么区别
+- Head：将囊括的标签放置到 head tag， 目前不清jkkk楚跟 next/head 有什么区别
 - Main: 你的 App 组件挂载点，next 用<div id="__next">来包裹 App
 - NextScript: Next 生产的 chunk 的加载脚本，一些 script tag
 
