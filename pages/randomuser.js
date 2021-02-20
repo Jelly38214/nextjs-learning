@@ -4,21 +4,21 @@ export default function User(props) {
     <Layout>
       <div style={{ display: "flex" }}>
         {props.results.map((user) => (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: 'wrap',
-            }}
-          >
+          <div className="img-wrapper">
             <img src={user.picture.large} width={200} height={100} />
             <span>
               {user.name.fisrt} {user.name.last}
             </span>
           </div>
         ))}
+        <style jsx>{`
+          .img-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+        `}</style>
       </div>
     </Layout>
   );

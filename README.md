@@ -10,9 +10,9 @@ Next 的路由体系：pages 下面的路径表示路由路径
 - 在 app 中获取
 
 Next.js Note:
-  - Polyfills `fetch()` on both the client and server. You don't need to import it.
-  - `getStaticProps`, `getStaticPaths` won't be included in the JS bundle for the browser. Besides, The API Route code also will not be part of your client bundel.
 
+- Polyfills `fetch()` on both the client and server. You don't need to import it.
+- `getStaticProps`, `getStaticPaths` won't be included in the JS bundle for the browser. Besides, The API Route code also will not be part of your client bundel.
 
 ### [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
 
@@ -21,18 +21,34 @@ Next.js has built-in support for loading environment . variables from `.env.loca
 In order to expose a variable to the browser you have to prefix the variable with `NEXT_PUBLIC_`.
 
 Various env file for various environment:
-  - .env for all environments
-  - .env.development for development environment
-  - .env.production for production environment
-  - .env.test for testing environment(NODE_ENV is set to 'test', though you usually don't need to do this manually as testing tools will address it for you.)
-  - .env.local always overrides the defaults set(this file should be added to `.gitignore`, as it is where secrets can be stored.)
+
+- .env for all environments
+- .env.development for development environment
+- .env.production for production environment
+- .env.test for testing environment(NODE_ENV is set to 'test', though you usually don't need to do this manually as testing tools will address it for you.)
+- .env.local always overrides the defaults set(this file should be added to `.gitignore`, as it is where secrets can be stored.)
+
+### [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode)
+
+The preview mode works on both `getServeSideProps` and `getStaticProps` as well as `API Routes`.
+
+API Routes will have access to `preview` and `previewData` under the request object.
+
+```js
+export default function myApiRoute(req, res) {
+  const isPreview = req.preview;
+  const previewData = req.previewData;
+}
+```
+[See What is show!](http://localhost:3000/api/preview?secret=ORANGE&slug=/previewmode&count=1)
 
 
 ### 自定义 Document
+
 其组成部分:
 
 - Html: html
-- Head：将囊括的标签放置到 head tag， 目前不清jkkk楚跟 next/head 有什么区别
+- Head：将囊括的标签放置到 head tag， 目前不清 jkkk 楚跟 next/head 有什么区别
 - Main: 你的 App 组件挂载点，next 用<div id="__next">来包裹 App
 - NextScript: Next 生产的 chunk 的加载脚本，一些 script tag
 
@@ -81,8 +97,8 @@ Various env file for various environment:
 - 在`document/head`或者`next/head`内添加, 字符串/数字/undefined/null 等非 metadata 标签
   - 表现：报错 -- Warning: next-head-count is missing
 
-
 NOTE:
-  - [getStaticProps details](https://nextjs.org/learn/basics/data-fetching/getstaticprops-details)
-  - [getStaticPaths details](https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details)
-  - Pages that begin with `[` and end with `]` are dynamic routes in Next.js
+
+- [getStaticProps details](https://nextjs.org/learn/basics/data-fetching/getstaticprops-details)
+- [getStaticPaths details](https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details)
+- Pages that begin with `[` and end with `]` are dynamic routes in Next.js
