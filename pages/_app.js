@@ -7,5 +7,6 @@
 import "../styles/global.css";
 
 export default function App({ Component, pageProps }) {
+  console.log('Custom App Start.')
   return <Component {...pageProps} />;
 }

@@ -15,6 +15,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData }) {
+  console.log('Index Page Start')
   return (
     <Layout home>
       <Head>

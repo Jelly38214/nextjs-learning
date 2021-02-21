@@ -43,9 +43,42 @@ export default function myApiRoute(req, res) {
 [See What is show!](http://localhost:3000/api/preview?secret=ORANGE&slug=/previewmode&count=1)
 
 
-### 自定义 Document
+### [Automatic Staic Optimization](https://nextjs.org/docs/advanced-features/automatic-static-optimization)
 
-其组成部分:
+Pages have absence of `getServerSideProps`,`getInitialProps` will be considered as SSG page.
+
+Caverats
+  - Optimization will be turned off in pages without SSG when you have a custom App with `getInitialProps`. (For SSG Page, will it be turned off as well?)
+  - For pages that are prerendered, its `ctx.req` is undefined.
+  - During prerendering, the router's `query` object will be empty, but dynamic routes page's not the same.
+
+### Custom Server
+
+A custom server will remove important performance optimizations, like serverless functions and Automatic Static Optimization.
+
+### Custom App
+
+> Next.js use App component to initialize pages.
+
+Adding a custom `getInitialProps` in your `App` will disable Automatic Static Optimization in pages with SSG.
+
+Custom App currently does not support Next.js Data Fetching methods like `getStaticProps`,`getServerSideProps`.
+
+### Costom Error Page
+
+Next.js provides both 404 and 500 error page by default.
+
+When you create both 404.js and _error.js page for customizing error page, Next.js will use 404.js first for 404, and _error.js for the rest of error.
+
+But when you create only _error.js， this file will handle all of errors including 404 instead of Next.js's 404 page.
+
+### Custom Document
+
+A custom Document commonly used to augment your applications `<html>`and`<body>` tags.
+
+> Custom Document is only rendered in the server, event handler like `onClick` won't work.
+
+Building Blocks:
 
 - Html: html
 - Head：将囊括的标签放置到 head tag， 目前不清 jkkk 楚跟 next/head 有什么区别
