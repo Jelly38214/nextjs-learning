@@ -38,6 +38,15 @@ export default function Home({ allPostsData }) {
         </div>
       </section>
 
+      <section>
+        <h2 className={utilStyles.headingLg}>ISG(Incremental Static Generation) Page</h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/isgmode`}>
+            <a>Dynamic amount of React start</a>
+          </Link>
+        </div>
+      </section>
+
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
