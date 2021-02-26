@@ -18,7 +18,7 @@ export async function runMiddleware(req, res, ...middlewares) {
  * @default 'GET,HEAD,PUT,PATCH,POST,DELETE'
  */
 export function allowRequestMethods(
-  methods = ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
+  methods = ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"]
 ) {
   return (req, res, next) => {
     const method = req.method;
