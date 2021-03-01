@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
+let count = 0;
 
 const ApplyPayComponent = () => {
   const [applePayAvailabel, setApplePayAvailabel] = useState(false);
@@ -349,7 +350,6 @@ const ApplyPayComponent = () => {
     <div>
       <div
         onClick={() => {
-          alert("Starting.....");
           const shippingMethods = [
             {
               ID: 141,
@@ -619,8 +619,11 @@ const ApplyPayComponent = () => {
             console.log("ShippingMethod Selected:");
             console.table(shippingMethod);
 
-            appleSession.abort();
-            return;
+            count++;
+            if (count === 4) {
+              appleSession.abort();
+              return;
+            }
 
             const update = {
               newTotal: {
