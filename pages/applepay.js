@@ -349,7 +349,7 @@ const ApplyPayComponent = () => {
     <div>
       <div
         onClick={() => {
-          alert('Starting.....')
+          alert("Starting.....");
           const shippingMethods = [
             {
               ID: 141,
@@ -525,8 +525,8 @@ const ApplyPayComponent = () => {
             requiredShippingContactFields: [
               "name",
               "phone",
-              "email",
-              "postalAddress",
+              // "email",
+              // "postalAddress",
             ],
             total: {
               label: "iHerb LLC.",
@@ -563,9 +563,6 @@ const ApplyPayComponent = () => {
               .then((res) => res.json())
               .then((merchantSession) => {
                 appleSession.completeMerchantValidation(merchantSession);
-                setTimeout(() => {
-                  appleSession.abort();
-                }, 15000);
               })
               .catch(() => appleSession.completeMerchantValidation({}));
           };
@@ -621,6 +618,9 @@ const ApplyPayComponent = () => {
             const shippingMethod = event.shippingMethod;
             console.log("ShippingMethod Selected:");
             console.table(shippingMethod);
+
+            appleSession.abort();
+            return;
 
             const update = {
               newTotal: {
