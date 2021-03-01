@@ -220,9 +220,6 @@ const ApplyPayComponent = () => {
         .then((res) => res.json())
         .then((merchantSession) => {
           appleSession.completeMerchantValidation(merchantSession);
-          setTimeout(() => {
-            appleSession.abort();
-          }, 15000);
         })
         .catch(() => appleSession.completeMerchantValidation({}));
     };
@@ -240,11 +237,11 @@ const ApplyPayComponent = () => {
 
       console.log(countryCode, zipCode);
 
-      // const error: ApplePayJS.ApplePayError = new window.ApplePayError(
-      //   'addressUnserviceable', // code
-      //   'country', // contactField
-      //   'Not Supported', // message
-      // )
+      const error = new window.ApplePayError(
+        "addressUnserviceable", // code
+        "country", // contactField
+        "Not Supported" // message
+      );
 
       // const update: ApplePayJS.ApplePayShippingContactUpdate = {
       //   newTotal: {
@@ -264,6 +261,10 @@ const ApplyPayComponent = () => {
           type: "final"
         }
       };
+
+      if (Math.floor(Math.random() * 10) > 4) {
+        update["errors"] = [error];
+      }
 
       try {
         appleSession.completeShippingContactSelection(update);
