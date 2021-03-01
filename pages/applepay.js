@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-let count = 0;
 
 const ApplyPayComponent = () => {
   const [applePayAvailabel, setApplePayAvailabel] = useState(false);
@@ -619,13 +618,6 @@ const ApplyPayComponent = () => {
             console.log("ShippingMethod Selected:");
             console.table(shippingMethod);
 
-            count++;
-            if (count === 3) {
-              appleSession.abort();
-              appleSession.completePaymentMethodSelection({});
-              return;
-            }
-
             const update = {
               newTotal: {
                 amount: `${Math.floor(Math.random() * 100)}`,
@@ -666,19 +658,11 @@ const ApplyPayComponent = () => {
             //   message: 'Pls Select the right address',
             // }
             const result = {
-              status: window.ApplePaySession.STATUS_SUCCESS,
+              status: window.ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT,
               // errors: [errorItem],
             };
 
-            await sleep(1000);
             appleSession.completePayment(result);
-            // alert('Complete Payment Successfully')
-            dispatch(
-              GlobalAction.Dialog.Show({
-                type: DialogType.NormalPopup,
-                title: "Complete Payment Successfully Successfully",
-              })
-            );
           };
 
           appleSession.oncancel = function oncancel() {
