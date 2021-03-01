@@ -349,6 +349,7 @@ const ApplyPayComponent = () => {
     <div>
       <div
         onClick={() => {
+          alert('Starting.....')
           const shippingMethods = [
             {
               ID: 141,
