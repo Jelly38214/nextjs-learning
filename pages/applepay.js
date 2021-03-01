@@ -310,13 +310,14 @@ const ApplyPayComponent = () => {
     appleSession.onpaymentauthorized = async function onpaymentauthorized(
       event
     ) {
+      alert("Start Payment.");
       const applePayment = event.payment;
       console.log(JSON.stringify(applePayment, null, 2));
       // const applePaymentToken: ApplePayJS.ApplePayPaymentToken = applePayment.token // it should be send to backend for payment.
 
       const errorItem = new window.ApplePayError(
         "shippingContactInvalid",
-        "phoneNumber",
+        "name",
         "Wrong Phone Number"
       );
       const result = {
