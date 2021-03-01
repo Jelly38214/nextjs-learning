@@ -620,8 +620,9 @@ const ApplyPayComponent = () => {
             console.table(shippingMethod);
 
             count++;
-            if (count === 4) {
+            if (count === 3) {
               appleSession.abort();
+              appleSession.completePaymentMethodSelection({});
               return;
             }
 
