@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
+import eruda from "eruda";
+
+eruda.init();
 
 const ApplyPayComponent = () => {
   const [applePayAvailabel, setApplePayAvailabel] = useState(false);
