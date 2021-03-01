@@ -3,9 +3,6 @@
  * You CANNOT import global CSS anywhere else but _app.js
  * The reason that global CSS can't be imported outside of `pages/_app.js` is that global CSS affects all elements on the page.
  */
-import eruda from "eruda";
-eruda.init();
-
 import "../styles/global.css";
 
 /**

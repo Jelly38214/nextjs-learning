@@ -4,18 +4,21 @@ import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import Date from "../components/date";
+import eruda from "eruda";
+
+eruda.init();
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData,
-    },
+      allPostsData
+    }
   };
 }
 
 export default function Home({ allPostsData }) {
-  console.log('Index Page Start')
+  console.log("Index Page Start");
   return (
     <Layout home>
       <Head>
@@ -39,7 +42,9 @@ export default function Home({ allPostsData }) {
       </section>
 
       <section>
-        <h2 className={utilStyles.headingLg}>ISG(Incremental Static Generation) Page</h2>
+        <h2 className={utilStyles.headingLg}>
+          ISG(Incremental Static Generation) Page
+        </h2>
         <div className={utilStyles.listItem}>
           <Link href={`/isgmode`}>
             <a>Dynamic amount of React start</a>
