@@ -183,10 +183,10 @@ const ApplyPayComponent = () => {
       shippingType: "shipping",
       // requiredBillingContactFields: ['postalAddress', 'name', 'phone', 'email'],
       requiredShippingContactFields: [
-        // "name"
-        "phone"
+        "name",
+        "phone",
         // "email",
-        // "postalAddress"
+        "postalAddress"
       ],
       total: {
         label: "iHerb LLC.",
@@ -266,11 +266,7 @@ const ApplyPayComponent = () => {
         update["errors"] = [error];
       }
 
-      try {
-        appleSession.completeShippingContactSelection(update);
-      } catch (error) {
-        console.error(error);
-      }
+      appleSession.completeShippingContactSelection(update);
     };
 
     appleSession.onshippingmethodselected = function onshippingmethodselected(
