@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import eruda from "eruda";
 
-eruda.init();
-
 const ApplyPayComponent = () => {
   const [applePayAvailabel, setApplePayAvailabel] = useState(false);
 
   useEffect(() => {
+    eruda.init();
     if (window.ApplePaySession) {
       // const merchantIdentifier = 'merchant.com.iherb.iherb.webtest'
       // window.ApplePaySession.canMakePaymentsWithActiveCard(merchantIdentifier).then((canMakePayments) => {
