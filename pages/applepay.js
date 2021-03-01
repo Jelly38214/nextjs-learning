@@ -5,7 +5,10 @@ const ApplyPayComponent = () => {
   const [applePayAvailabel, setApplePayAvailabel] = useState(false);
 
   useEffect(() => {
-    eruda.init();
+    if (typeof window === "undefined") {
+      global.window = {};
+      eruda.init();
+    }
     if (window.ApplePaySession) {
       // const merchantIdentifier = 'merchant.com.iherb.iherb.webtest'
       // window.ApplePaySession.canMakePaymentsWithActiveCard(merchantIdentifier).then((canMakePayments) => {
