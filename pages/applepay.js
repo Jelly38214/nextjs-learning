@@ -316,15 +316,15 @@ const ApplyPayComponent = () => {
       // const applePaymentToken: ApplePayJS.ApplePayPaymentToken = applePayment.token // it should be send to backend for payment.
 
       const errorItem = new window.ApplePayError(
-        "shippingContactInvalid",
+        "addressUnserviceable",
         "name",
         "Wrong Phone Number"
       );
       const result = {
         // status: window.ApplePaySession.STATUS_SUCCESS
         // status: window.ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT,
-        status: window.ApplePaySession.STATUS_FAILURE
-        // errors: [errorItem]
+        status: window.ApplePaySession.STATUS_FAILURE,
+        errors: [errorItem]
       };
 
       appleSession.completePayment(result);
