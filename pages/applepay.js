@@ -331,6 +331,7 @@ const ApplyPayComponent = () => {
 
     appleSession.oncancel = function oncancel() {
       alert("Payment Canceled.");
+      window.location = "https://www.google.com/";
     };
 
     appleSession.abort = function abort() {
