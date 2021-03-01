@@ -322,8 +322,9 @@ const ApplyPayComponent = () => {
       );
       const result = {
         // status: window.ApplePaySession.STATUS_SUCCESS
-        status: window.ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT,
-        errors: [errorItem]
+        // status: window.ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT,
+        status: window.ApplePaySession.STATUS_FAILURE
+        // errors: [errorItem]
       };
 
       appleSession.completePayment(result);
@@ -331,7 +332,6 @@ const ApplyPayComponent = () => {
 
     appleSession.oncancel = function oncancel() {
       alert("Payment Canceled.");
-      window.location = "https://www.google.com/";
     };
 
     appleSession.abort = function abort() {
