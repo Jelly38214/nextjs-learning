@@ -183,10 +183,10 @@ const ApplyPayComponent = () => {
       shippingType: "shipping",
       // requiredBillingContactFields: ['postalAddress', 'name', 'phone', 'email'],
       requiredShippingContactFields: [
-        "name",
-        "phone",
-        "email",
-        "postalAddress"
+        // "name"
+        "phone"
+        // "email",
+        // "postalAddress"
       ],
       total: {
         label: "iHerb LLC.",
@@ -317,7 +317,7 @@ const ApplyPayComponent = () => {
 
       const errorItem = new window.ApplePayError(
         "addressUnserviceable",
-        "name",
+        "phone",
         "Wrong Phone Number"
       );
       const result = {

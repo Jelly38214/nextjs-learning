@@ -9,6 +9,7 @@
   "dependencies": {
     "cors": "2.8.5",
     "date-fns": "^2.17.0",
+    "eruda": "2.4.1",
     "gray-matter": "^4.0.2",
     "next": "^10.0.0",
     "react": "17.0.1",
