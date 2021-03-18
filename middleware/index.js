@@ -1,5 +1,3 @@
-import { fi } from "date-fns/locale";
-
 export async function runMiddleware(req, res, ...middlewares) {
   middlewares = middlewares.filter((fn) => typeof fn === "function");
 
