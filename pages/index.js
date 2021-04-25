@@ -3,14 +3,14 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
-import Date from "../components/date";
+import DateFnsComponent from "../components/date";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData
-    }
+      allPostsData,
+    },
   };
 }
 
@@ -48,6 +48,16 @@ export default function Home({ allPostsData }) {
           </Link>
         </div>
       </section>
+      <section>
+        <h2 className={utilStyles.headingLg}>
+          Google Analytics Demo Page
+        </h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/ga`}>
+            <a>Google Analytics Demo</a>
+          </Link>
+        </div>
+      </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
@@ -59,7 +69,7 @@ export default function Home({ allPostsData }) {
               </Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
+                <DateFnsComponent dateString={date} />
               </small>
             </li>
           ))}
