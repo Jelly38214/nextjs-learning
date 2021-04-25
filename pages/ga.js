@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Layout from "../components/layout";
 
-export default () => {
+const GaComponent = () => {
   const handleEvent = useCallback(() => {
     setTimeout(() => {
       gtag("event", "e_express_checkout_success", {
@@ -22,3 +22,5 @@ export default () => {
     </Layout>
   );
 };
+
+export default GaComponent
