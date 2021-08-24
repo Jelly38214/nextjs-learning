@@ -1,17 +1,19 @@
 /**
  * Html, Head, Main and NextScript are required for the page to be properly rendered.
+ * A custom Document is commonly used to augment your applications <html> and <body>
  */
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
+  // ctx object is equivalent to the one received in `getInitialProps`, with one addition -- renderPage: Function
   static async getInitialProps(ctx) {
-    console.log("Custom Document Start getInitialProps");
+    console.log("Document Start getInitialProps", Object.keys(ctx));
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    return { ...initialProps, name: "Jelly" }; // {html: string, head: ReactElement[], styles:[]}
   }
 
   render() {
-    console.log("Custom Document Start");
+    console.log("Document start Render");
     return (
       <Html>
         <Head>
@@ -41,7 +43,7 @@ class MyDocument extends Document {
           ></script>
         </Head>
         <body>
-          <Main />
+          <Main name={this.props.name} />
           <NextScript />
         </body>
       </Html>

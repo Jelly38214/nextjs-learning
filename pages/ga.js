@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import Layout from "../components/layout";
 
-const GaComponent = () => {
+const GaComponent = (props) => {
+  console.log('Props in GaComponent:', props)
   const handleEvent = useCallback(() => {
     setTimeout(() => {
       gtag("event", "e_express_checkout_success", {
@@ -22,5 +23,12 @@ const GaComponent = () => {
     </Layout>
   );
 };
+
+GaComponent.getInitialProps = async () => {
+  console.log('getInitialProps in GaComponent')
+  return {
+    props: {name: 'Jelly'}
+  }
+}
 
 export default GaComponent

@@ -5,7 +5,12 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import DateFnsComponent from "../components/date";
 
-export async function getStaticProps() {
+/**
+ *
+ * @type import("next").GetServerSideProps;
+ */
+export async function getStaticProps(_context) {
+  console.log("Index start getStaticProps");
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -14,8 +19,8 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allPostsData }) {
-  console.log("Index Page Start");
+export default function Home({ allPostsData, name }) {
+  console.log("Index Start Render", name);
   return (
     <Layout home>
       <Head>
@@ -49,9 +54,7 @@ export default function Home({ allPostsData }) {
         </div>
       </section>
       <section>
-        <h2 className={utilStyles.headingLg}>
-          Google Analytics Demo Page
-        </h2>
+        <h2 className={utilStyles.headingLg}>Google Analytics Demo Page</h2>
         <div className={utilStyles.listItem}>
           <Link href={`/ga`}>
             <a>Google Analytics Demo</a>
@@ -62,7 +65,7 @@ export default function Home({ allPostsData }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
+          {allPostsData?.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
