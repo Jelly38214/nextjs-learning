@@ -43,6 +43,7 @@ class MyDocument extends Document {
           ></script>
         </Head>
         <body>
+          {/* Will not pass name to Main */}
           <Main name={this.props.name} />
           <NextScript />
         </body>

@@ -234,9 +234,10 @@ getServerSideProps则可以写node相关代码
 
 > 整个Next.js请求流程
 1. 首先_app.js的getInitialProps会执行
-  - 在里面,必须执行await App.getInitialProps(appContext), 这里其实是去执行当前页面的getInitialProps/getServerSideProps
+  - 在里面,必须执行await App.getInitialProps(appContext), 这里其实是去执行当前页面的getInitialProps.如果页面没有getInitialProps,那么返回{pageProps: {}}.如果有,则执行,并直接赋值给pageProps
   - 得到来自页面返回的数据,并放回到pageProps字段下, 返回一个对象{pageProps: {props: object}}
-2. App Component 开始执行, 它接收两个参数,一个是Component, 它是当前页面对应的组件; 一个是pageProps,是来自第一步得到的结果,用于传递给Component,当作Component的props, 用法<Component {...pageProps.props}>
+  - 如果页面没有getInitialProps ,但有getServerSideProps/getStaticProps, 则执行它们,返回{props: object}
+2. App Component 开始执行, 它接收两个参数,一个是Component, 它是当前页面对应的组件; 一个是pageProps,是来自第一步得到的结果(Object.assign(pageProps, props), 页面组件的结果优先级高),用于传递给Component,当作Component的props, 用法<Component {...pageProps.props}>
 3. 当前页面得到了来自App给予的props,开始渲染
 4. _document.js拿到来自App Component, 开始渲染整个页面,并生成html文件
 

@@ -17,7 +17,10 @@ export function reportWebVitals(metrics) {
 // Component表示当前页面
 // pageProps默认空对象, 可以预加载数据进行填充
 export default function MyApp({ Component, pageProps }) {
-  console.log("App Start Render");
+  // 来自MyApp.getInitialProps的返回对象里的pageProps会和页面组件的getServerSideProps/getStaticProp返回的对象的props做合并
+  // props的优先级更高
+  // pageProps = Object.assign(pageProps, props)
+  console.log("App Start Render", pageProps);
   return <Component {...pageProps} />;
 }
 
@@ -28,8 +31,8 @@ MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   console.log("App Start getInitialProps", Object.keys(appContext));
   const appProps = await App.getInitialProps(appContext); // {pageProps: {}}
-  console.log('after App.getInitialProps')
-  appProps.pageProps.time = Math.floor(Math.random() * 10)
+  console.log('after App.getInitialProps', appProps)
+  // appProps.pageProps.time = Math.floor(Math.random() * 10)
 
   return { ...appProps };
 };
