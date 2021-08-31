@@ -10,29 +10,43 @@ import App from "next/app";
  * @description Measuring performance
  * @param {*} metrics
  */
-export function reportWebVitals(metrics) {
-  console.log(metrics);
-}
+// export function reportWebVitals(metrics) {
+//   console.log(metrics);
+// }
 
 // Component表示当前页面
 // pageProps默认空对象, 可以预加载数据进行填充
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps, randomTimeInApp }) {
   // 来自MyApp.getInitialProps的返回对象里的pageProps会和页面组件的getServerSideProps/getStaticProp返回的对象的props做合并
   // props的优先级更高
   // pageProps = Object.assign(pageProps, props)
-  console.log("App Start Render", pageProps);
+  console.log("App Start Render", pageProps, randomTimeInApp);
   return <Component {...pageProps} />;
 }
 
 // Disable the ability to perform automatic static optimization, causing every page in your app to be server-side rendered.
 // Must call App.getInitialProps(appContext) inside `getInitialProps` and merge the returned object into return value.
 // Not support `getStaticProps` and `getServerSideProps`
+
+// 跳转到拥有getStaticProps的页面,不会触发这个函数,因为这个页面的数据在build时就已经获取到,并被缓存下来
+// 跳转到该页面时,直接把缓存好的数据给页面渲染即可
 MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  console.log("App Start getInitialProps", Object.keys(appContext));
-  const appProps = await App.getInitialProps(appContext); // {pageProps: {}}
-  console.log('after App.getInitialProps', appProps)
-  // appProps.pageProps.time = Math.floor(Math.random() * 10)
+  console.log("App getInitialProps Start", Object.keys(appContext));
+  await sleep(); // 模拟请求耗时
 
-  return { ...appProps };
+  // 如果页面没有getInitialProps方法则返回{pageProps: {}}
+  // 如果页面有getServerSideProps,则在App getInitialProps执行完毕后去执行getServerSideProps, 得到的结果,再赋予到pageProps
+  const appProps = await App.getInitialProps(appContext);
+  console.log("App getInitialProps End", appProps);
+
+  return { ...appProps, randomTimeInApp: Date.now() }; // Next.js会merge这个对象, 再添加其他一些属性,一并挂到MyApp的this.props
 };
+
+function sleep() {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res();
+    }, 3000);
+  });
+}

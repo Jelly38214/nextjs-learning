@@ -19,13 +19,43 @@ export async function getStaticProps(_context) {
   };
 }
 
-export default function Home({ allPostsData, name }) {
-  console.log("Index Start Render", name);
+export default function Home(props) {
+  console.log("Index Start Render", props.name);
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <section>
+        <h2 className={utilStyles.headingLg}>
+          app getInitialProps and page getStaticProps
+        </h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/getStaticPropsInPage`}>
+            <a>getStaticPropsInPage</a>
+          </Link>
+        </div>
+      </section>
+      <section>
+        <h2 className={utilStyles.headingLg}>
+          app getInitialProps and page getServerSideProps
+        </h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/getServerSidePropsInPage`}>
+            <a>getServerSidePropsInPage</a>
+          </Link>
+        </div>
+      </section>
+      <section>
+        <h2 className={utilStyles.headingLg}>
+          app getInitialProps and page getInitialProps
+        </h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/getInitialPropsInPage`}>
+            <a>getInitialPropsInPage</a>
+          </Link>
+        </div>
+      </section>
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
@@ -65,7 +95,7 @@ export default function Home({ allPostsData, name }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData?.map(({ id, date, title }) => (
+          {props.allPostsData?.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>

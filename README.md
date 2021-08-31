@@ -195,8 +195,10 @@ App Component is used to initialize pages.
 - err - Error object if any error is encountered during the rendering.
 
 > `getInitialProps`既可以在服务端运行,也可以在客户端运行
-不用文件的getInitialProps接收到的参数也不一样
+- 当通过输入url,刷新等非方式进入到页面,页面的getInitialProps就在服务端执行
+- 通过next/link, next/route的方式跳转到页面, 页面的getInitialProps则在浏览器内运行
 
+不同文件的getInitialProps接收到的参数也不一样
 _document的getInitialProps(ctx & {renderPage})
 
 _app的getInitialProps({AppTree, Component, router, ctx})
@@ -231,6 +233,8 @@ getServerSideProps必须要返回一个Object,包含:
 getServerSideProps则可以写node相关代码
 
 一旦一个页面使用了getInitialProps或者getServerSideProps, 每次切换该页面,_app的getInitialProps都会触发
+
+> 如何在页面或者app的getInitialProps判断当前环境是服务端还是客户端
 
 > 整个Next.js请求流程
 1. 首先_app.js的getInitialProps会执行
