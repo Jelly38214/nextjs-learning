@@ -249,6 +249,22 @@ getServerSideProps则可以写node相关代码
 
 总结: 页面的getInitialProps/getServerSideProps一定是在_app.js的getInitialProps里面被触发执行,然后根据需要组成需要的数据对象:{pageProps: {props: object}}并返回,然后在_app.js的App Component使用组成好的数据完成整个组件树的渲染
 
+> 纠正:
+通过输入URL跳到页面, 有不同行为(生产模式)
+-> 有getStaticProps(ISG不算), _app getInitialProps不会执行
+-> 没有getStaticProps/ISG, _app getInitialProps会执行,并且在服务端执行
+
+通过Link跳到不同的页面,有不同的行为(生产模式)
+-> 有getServerSideProps的页面, _app getInitialProps会执行,并且在服务端执行
+-> 有getStaticProps/ISG的页面, _app getInitialProps不会执行
+-> 有/没有getInitialProps的页面, _app getInitialProps会执行, 并且在浏览器端执行
+
+通过输入URL跳到页面(dev模式), _app getInitialProps一定都会执行,并且在服务端执行
+通过Link跳到不同的页面,有不同的行为(dev模式)
+-> 有getServerSideProps的页面, _app getInitialProps会执行, 并且在服务端执行
+-> 有getStaticProps/ISG的页面, _app getInitialProps会执行, 并且在服务端执行 
+-> 有/没有getInitialProps的页面, _app getInitialProps会执行, 并且在浏览器端执行
+
 NOTE:
 
 - [getStaticProps details](https://nextjs.org/learn/basics/data-fetching/getstaticprops-details)

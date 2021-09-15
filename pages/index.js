@@ -20,12 +20,20 @@ export async function getStaticProps(_context) {
 }
 
 export default function Home(props) {
-  console.log("Index Start Render", props.name);
+  console.log("Index Start Render", props);
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <section>
+        <h2 className={utilStyles.headingLg}>Demo</h2>
+        <div className={utilStyles.listItem}>
+          <Link href={`/nohooks`}>
+            <a>Demo</a>
+          </Link>
+        </div>
+      </section>
       <section>
         <h2 className={utilStyles.headingLg}>
           app getInitialProps and page getStaticProps

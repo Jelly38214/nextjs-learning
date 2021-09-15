@@ -4,7 +4,9 @@
  * The reason that global CSS can't be imported outside of `pages/_app.js` is that global CSS affects all elements on the page.
  */
 import "../styles/global.css";
-import App from "next/app";
+import App, { AppContext } from "next/app";
+import { Provider } from "react-redux";
+import { useStore } from "../store";
 
 /**
  * @description Measuring performance
@@ -21,7 +23,14 @@ export default function MyApp({ Component, pageProps, randomTimeInApp }) {
   // props的优先级更高
   // pageProps = Object.assign(pageProps, props)
   console.log("App Start Render", pageProps, randomTimeInApp);
-  return <Component {...pageProps} />;
+  const { initialReduxState } = pageProps;
+
+  const store = useStore(pageProps.initialReduxState);
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />;
+    </Provider>
+  );
 }
 
 // Disable the ability to perform automatic static optimization, causing every page in your app to be server-side rendered.
@@ -31,6 +40,7 @@ export default function MyApp({ Component, pageProps, randomTimeInApp }) {
 // 跳转到拥有getStaticProps的页面,不会触发这个函数,因为这个页面的数据在build时就已经获取到,并被缓存下来
 // 跳转到该页面时,直接把缓存好的数据给页面渲染即可
 MyApp.getInitialProps = async (appContext) => {
+  console.log("xxxxxxxxx", appContext.ctx.req.headers);
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   console.log("App getInitialProps Start", Object.keys(appContext));
   await sleep(); // 模拟请求耗时
@@ -47,6 +57,6 @@ function sleep() {
   return new Promise((res) => {
     setTimeout(() => {
       res();
-    }, 3000);
+    }, 1000);
   });
 }

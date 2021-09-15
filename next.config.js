@@ -1,5 +1,6 @@
 module.exports = (phase, arg) => {
   return {
+    serverRuntimeConfig: NextConfig.serverRuntimeConfig,
     async rewrites() {
       return [
         {

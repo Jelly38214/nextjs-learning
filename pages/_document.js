@@ -9,11 +9,12 @@ class MyDocument extends Document {
   static async getInitialProps(ctx) {
     console.log("Document Start getInitialProps", Object.keys(ctx));
     const initialProps = await Document.getInitialProps(ctx);
+    console.log("After Document.getInitialProps execution", Object.keys(initialProps));
     return { ...initialProps, name: "Jelly" }; // {html: string, head: ReactElement[], styles:[]}
   }
 
   render() {
-    console.log("Document start Render");
+    console.log("Document start Render:", Object.keys(this.props.__NEXT_DATA__.props.pageProps));
     return (
       <Html>
         <Head>
