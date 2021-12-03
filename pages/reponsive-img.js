@@ -95,7 +95,7 @@ export default function ResponsiveImg() {
           https://via.placeholder.com/600x300?text=max-1000px-3x 3x,
           "
         />
-        <img img="https://via.placeholder.com/200x100?text=min-1000px" />
+        <img src="https://via.placeholder.com/200x100?text=min-1000px" />
       </picture>
     </div>
   );
