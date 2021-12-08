@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps, randomTimeInApp }) {
   const store = useStore(pageProps.initialReduxState);
   return (
     <Provider store={store}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Provider>
   );
 }
