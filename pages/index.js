@@ -3,7 +3,6 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
-import DateFnsComponent from "../components/date";
 
 /**
  *
@@ -27,7 +26,9 @@ export default function Home(props) {
         <title>{siteTitle}</title>
       </Head>
       <section>
-        <h2 className={utilStyles.headingLg}>Demo</h2>
+        <h2 data-qa-element="demo" className={utilStyles.headingLg}>
+          Demo
+        </h2>
         <div className={utilStyles.listItem}>
           <Link href={`/nohooks`}>
             <a>Demo</a>
@@ -110,7 +111,7 @@ export default function Home(props) {
               </Link>
               <br />
               <small className={utilStyles.lightText}>
-                <DateFnsComponent dateString={date} />
+                {date}
               </small>
             </li>
           ))}
